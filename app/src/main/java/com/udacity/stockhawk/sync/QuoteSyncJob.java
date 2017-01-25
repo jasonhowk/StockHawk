@@ -71,8 +71,12 @@ public final class QuoteSyncJob {
             while (iterator.hasNext()) {
                 String symbol = iterator.next();
 
-
                 Stock stock = quotes.get(symbol);
+
+                if (stock.getName() == null) {
+                    // It's not a valid stock if it doesn't have a name.
+                    break;
+                }
                 StockQuote quote = stock.getQuote();
 
                 float price = quote.getPrice().floatValue();
